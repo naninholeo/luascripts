@@ -1,6 +1,6 @@
---WIP
+-- SCRIPT DONE BY NANI, DONT SCAM CREDITS OR REPOST WITHOUT THEM TYSM
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/neonixran/MaterialLua/master/Module.lua"), "Material Lua")()
---if getgenv().scriptexecuted == true then game.Players.LocalPlayer:Kick("Do not execute the script two times or more") end
+if getgenv().scriptexecuted == true then game.Players.LocalPlayer:Kick("Do not execute the script two times or more") end
 repeat wait() until game:IsLoaded()
 local Lib = Library:Load({
     Title = "Something hub",
@@ -51,7 +51,33 @@ local startjp = game.Players.LocalPlayer.Character.Humanoid.JumpPower or game.Pl
 --functions
 local function createhighlight(folder, chp)
     local high = Instance.new("Highlight",folder)
-high.Adornee = chp.Character
+    high.FillTransparency = 0.4
+    high.OutlineTransparency = 0
+    high.OutlineColor = Color3.fromRGB(0,0,0)
+    high.Adornee = chp.Character
+end
+local function createtext(folder, chp)
+    local bgui = Instance.new("BillboardGui", folder)
+    bgui.Name = "bgui for esp"
+    bgui.Size = UDim2.new(7,0,7,0)
+    bgui.AlwaysOnTop = true
+    bgui.Active = true
+    bgui.Adornee = chp.Character.HumanoidRootPart
+    bgui.Enabled = true
+    bgui.StudsOffsetWorldSpace = Vector3.new(0,1,0)
+    local textlabel = Instance.new("TextLabel", bgui)
+    textlabel.Size = UDim2.new(1,0,1,0)
+    textlabel.Visible = true
+    textlabel.Active = true
+    textlabel.BackgroundTransparency = 1
+    textlabel.TextSize = 10
+    textlabel.TextColor3 = Color3.fromRGB(255,255,255)
+    textlabel.TextStrokeColor3 = Color3.fromRGB(0,0,0)
+    textlabel.TextStrokeTransparency = 0
+    textlabel.Name = "Espname"
+    local rsforlabels = game:GetService("RunService").RenderStepped:Connect(function()
+        textlabel.Text = chp.Name .. " | " .. tostring(math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - chp.Character.HumanoidRootPart.Position).magnitude))  .. " studs away" .. " | " .. math.floor(chp.Character.Humanoid.Health)
+    end)
 end
 function newesp(player)
     local findesp = game.CoreGui:FindFirstChild("foldesp")
@@ -59,29 +85,9 @@ function newesp(player)
         local foldesp = Instance.new("Folder", game.CoreGui)
         foldesp.Name = "foldesp"
         createhighlight(foldesp, player)
-        local bgui = Instance.new("BillboardGui", foldesp)
-        bgui.Name = "bgui for esp"
-        bgui.Size = UDim2.new(7,0,7,0)
-        bgui.AlwaysOnTop = true
-        bgui.Active = true
-        bgui.Adornee = player.Character.HumanoidRootPart
-        bgui.Enabled = true
-        bgui.StudsOffsetWorldSpace = Vector3.new(0,1,0)
-        local textlabel = Instance.new("TextLabel", bgui)
-        textlabel.Size = UDim2.new(1,0,1,0)
-        textlabel.Visible = true
-        textlabel.Active = true
-        textlabel.BackgroundTransparency = 1
-        textlabel.AlwaysOnTop = true
-        textlabel.TextSize = 10
-        textlabel.AnchorPoint = Vector2.new(0, 0)
-        textlabel.Color3 = Color3.fromRGB(255,255,255)
-        textlabel.Name = "Espname"
-        textlabel.Text = player.Name .. " | " .. tostring(math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).magnitude))  .. " studs away" --.. " | " .. math.floor(player.Character.Humanoid.Health)
-        local rsforlabels = game:GetService("RunService").RenderStepped:Connect(function()
-            textlabel.Text = player.Name .. " | " .. tostring(math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).magnitude))  .. " studs away" --.. " | " .. math.floor(player.Character.Humanoid.Health)
-        end)
+        createtext(foldesp,player)
         else createhighlight(findesp, player)
+        createtext(findesp,player)
     end
 end
 --tabs and rest
@@ -139,15 +145,19 @@ local lptoggle = page1:Toggle({
 local Vis = Lib:New({
     Title = "Visual"
 })
-local esp = Vis:Button({
+local esp = Vis:Toggle({
     Text = "Player esp",
     Callback = function(val)
-        for i,v in pairs(game:GetService("Players"):GetPlayers()) do
-           if v.Name ~= lp.Name then
-                newesp(v)
-           end 
+        if val then
+            for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+            if v.Name ~= lp.Name then
+                    newesp(v)
+            end
+            end
+        else game:GetService("CoreGui"):FindFirstChild("foldesp"):Destroy()
         end
-    end
+    end,
+    Enabled = false
 })
 
 getgenv().scriptexecuted = true
