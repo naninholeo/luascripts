@@ -159,5 +159,26 @@ local esp = Vis:Toggle({
     end,
     Enabled = false
 })
-
+--new tab--
+local Util = Lib:New({
+    Title = "Utilities"
+})
+local dex = Util:Button({
+    Text = "Dark Dex(inf yield one better)",
+    Callback = function(val)
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/Lazy_Dex.lua"))()
+    end
+})
+local simplespy = Util:Button({
+    Text = "Simply spy(remote tracker)",
+    Callback = function(val)
+        loadstring(game:HttpGet("https://github.com/exxtremestuffs/SimpleSpySource/raw/master/SimpleSpy.lua"))()
+    end
+})
+local infy = Util:Button({
+    Text = "Infinite yield(op)....",
+    Callback = function(val)
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+    end
+})
 getgenv().scriptexecuted = true
