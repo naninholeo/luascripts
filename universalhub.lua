@@ -76,7 +76,7 @@ local function createtext(folder, chp)
     textlabel.TextStrokeTransparency = 0
     textlabel.Name = "Espname"
     local rsforlabels = game:GetService("RunService").RenderStepped:Connect(function()
-        textlabel.Text = chp.Name .. " | " .. tostring(math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - chp.Character.HumanoidRootPart.Position).magnitude))  .. " studs away" .. " | " .. math.floor(chp.Character.Humanoid.Health)
+        textlabel.Text = chp.Name .. " | " .. tostring(math.floor((game.Players.LocalPlayer.Character.HumanoidRootPart.Position - chp.Character.HumanoidRootPart.Position).magnitude))  .. " studs away" .. " | " .. math.floor(chp.Character.Humanoid.Health) .. " HP"
     end)
 end
 function newesp(player)
