@@ -1,6 +1,5 @@
 -- SCRIPT DONE BY NANI, DONT SCAM CREDITS OR REPOST WITHOUT THEM TYSM
 local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/neonixran/MaterialLua/master/Module.lua"), "Material Lua")()
-if getgenv().scriptexecuted == true then game.Players.LocalPlayer:Kick("Do not execute the script two times or more") end
 repeat wait() until game:IsLoaded()
 local Lib = Library:Load({
     Title = "Something hub",
@@ -198,4 +197,3 @@ local infy = Util:Button({
         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
     end
 })
-getgenv().scriptexecuted = true
