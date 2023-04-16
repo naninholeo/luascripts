@@ -149,11 +149,13 @@ local esp = Vis:Toggle({
     Text = "Player esp",
     Callback = function(val)
         if val then
+	local ez;				
             for i,v in pairs(game:GetService("Players"):GetPlayers()) do
             if v.Name ~= lp.Name then
                     newesp(v)
             end
             end
+		ez = game:GetService("Workspace").CharacterAdded:Connect(newesp)		
         else game:GetService("CoreGui"):FindFirstChild("foldesp"):Destroy()
         end
     end,
