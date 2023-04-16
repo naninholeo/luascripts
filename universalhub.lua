@@ -90,6 +90,14 @@ function newesp(player)
         createtext(findesp,player)
     end
 end
+local function playerjoined(player)
+    if player.Character then
+        newesp(player)
+    end
+    player.CharacterAdded:Connect(function(character)
+                        newesp(character.Parent)
+                        end)
+end
 --tabs and rest
 local page1 = Lib:New({
     Title = "LocalPlayer"
@@ -148,6 +156,7 @@ local Vis = Lib:New({
 local esp = Vis:Toggle({
     Text = "Player esp",
     Callback = function(val)
+	local espactive;
         if val then
 	local ez;				
             for i,v in pairs(game:GetService("Players"):GetPlayers()) do
@@ -155,8 +164,9 @@ local esp = Vis:Toggle({
                     newesp(v)
             end
             end
-		ez = game:GetService("Workspace").CharacterAdded:Connect(newesp)		
+		espactive = game.Players.PlayerAdded:Connect(newesp)		
         else game:GetService("CoreGui"):FindFirstChild("foldesp"):Destroy()
+	espactive:Disconnect()
         end
     end,
     Enabled = false
