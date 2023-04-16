@@ -84,10 +84,15 @@ function newesp(player)
     if not findesp then
         local foldesp = Instance.new("Folder", game.CoreGui)
         foldesp.Name = "foldesp"
-        createhighlight(foldesp, player)
-        createtext(foldesp,player)
-        else createhighlight(findesp, player)
-        createtext(findesp,player)
+	local playerfolder = Instance.new("Folder", foldesp)
+	playerfolder.Name == player.Name
+        createhighlight(playerfolder, player)
+        createtext(playerfolder,player)
+        else 
+	local playerfolder = Instance.new("Folder", finddesp)
+	playerfolder.Name == player.Name
+	createhighlight(playerfolder, player)
+        createtext(playerfolder,player)
     end
 end
 local function playerjoined(player)
@@ -164,7 +169,7 @@ local esp = Vis:Toggle({
                     newesp(v)
             end
             end
-		espactive = game.Players.PlayerAdded:Connect(newesp)		
+		espactive = game.Players.PlayerAdded:Connect(playeradded)		
         else game:GetService("CoreGui"):FindFirstChild("foldesp"):Destroy()
 	espactive:Disconnect()
         end
