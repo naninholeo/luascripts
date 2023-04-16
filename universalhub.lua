@@ -85,12 +85,12 @@ function newesp(player)
         local foldesp = Instance.new("Folder", game.CoreGui)
         foldesp.Name = "foldesp"
 	local playerfolder = Instance.new("Folder", foldesp)
-	playerfolder.Name == player.Name
+	    playerfolder.Name = player.Name
         createhighlight(playerfolder, player)
         createtext(playerfolder,player)
         else 
 	local playerfolder = Instance.new("Folder", finddesp)
-	playerfolder.Name == player.Name
+	playerfolder.Name = player.Name
 	createhighlight(playerfolder, player)
         createtext(playerfolder,player)
     end
